@@ -5,6 +5,7 @@ import Home from './Pages/Home /Home'
 import DirectoryPage from './Components/Directory Page/DirectoryPage'
 import SignIn from './Pages/Sign In page/SignIn'
 import Shop from './Pages/Shop/Shop'
+import Dashboard from './Pages/Dashboard/Dashboard'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
     <Route index element={<DirectoryPage/>}/> 
     <Route path='/category/:param' element={<ShopPage/>}/> 
     <Route path='/signin' element={<SignIn/>}/> 
+    <Route path='/dashboard' element={<Dashboard/>}/> 
     <Route path='/shop' element={<Shop/>}/> 
    </Route>
     

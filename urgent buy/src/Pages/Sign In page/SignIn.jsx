@@ -1,6 +1,6 @@
 import axios from 'axios'
 import '/src/Pages/Sign In page/signin.styles.scss'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,8 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
+
 const SignIn = () => {
-	const navigate = useNavigate()
+
+	
 
 	const formik = useFormik({
 		initialValues: {
@@ -51,15 +54,16 @@ const SignIn = () => {
 			Password: yup.string().required('Password is required')
 
 		}), onSubmit: async (value) => {
+
 			try {
 				const res = await axios.post('http://localhost:4000/Api/User/login', value)
 				if (res.data.status == 'success') {
 					toast.success(res.data.message)
-					localStorage.setItem('urgentBuyToken' , res.data.genToken )
-					setTimeout(()=> {
-						navigate('/')
-					} , 5000)
-               
+					localStorage.setItem('urgentBuyToken', res.data.genToken)
+					setTimeout(() => {
+						window.location.href = '/dashboard'
+					}, 5000)
+
 				} else {
 					toast.error(res.data.message)
 				}
@@ -100,7 +104,7 @@ const SignIn = () => {
 	return (
 
 
-		<div className="container mt-5" id="container">
+		<div className="container " id="container">
 			<div className="form-container sign-up-container">
 				<form onSubmit={formik.handleSubmit} action="#">
 					<h1 className='customer-text1' style={{ minWidth: "160px" }}>Create Account</h1>
@@ -129,7 +133,16 @@ const SignIn = () => {
 					<small className='customer-text1 text-danger d-flex justify-content-start w-100' style={{ minWidth: "160px" }}><small>{formik2.touched.Password && formik2.errors.Password ? formik2.errors.Password : ''}</small></small>
 					<Link style={{ minWidth: "180px" }} href="#">Forgot your password?</Link>
 					<button type='submit' className='rounded mt-4 buttonClass' style={{ minWidth: "160px" }} >Sign In</button>
-					<ToastContainer />
+					<ToastContainer     
+				zIndex={9999}
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
 				</form>
 			</div>
 			<div className="overlay-container">
