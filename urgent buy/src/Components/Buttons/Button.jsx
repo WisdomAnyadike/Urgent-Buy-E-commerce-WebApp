@@ -4,7 +4,7 @@ import '/src/Components/Buttons/Buttons.styles.scss'
 
 
 
-const Button = ({children , buttonType , styles}) => {
+const Button = ({children , buttonType , styles , func}) => {
     const ButtonComponent = {
         normal: 'normal-button' ,
         inverted : 'inverted'
@@ -12,7 +12,7 @@ const Button = ({children , buttonType , styles}) => {
 
   return (
     <>
- <button className={`button-container rounded ${ButtonComponent[buttonType]}  ${styles} `} > {children} </button>
+ <button onClick={func} className={`button-container rounded ${ButtonComponent[buttonType]}  ${styles} `} > {children} </button>
     </>
    
   )

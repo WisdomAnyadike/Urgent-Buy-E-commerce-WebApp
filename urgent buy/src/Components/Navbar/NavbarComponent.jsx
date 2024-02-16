@@ -11,15 +11,6 @@ import {  useSelector } from "react-redux";
 
 
 const NavbarComponent = () => {
-  const {value} = useSelector(state => state)
-  console.log(value);
-  
-  
-
-
-  const [showSignout, setShowSignOut] = useState(false)
-  const checkRoute = useLocation()
-
   useEffect(() => {
     if (location.pathname == '/dashboard') {
       setShowSignOut(true)
@@ -41,6 +32,17 @@ const NavbarComponent = () => {
 
     }
   }, []);
+
+  const {value} = useSelector(state => state)
+  console.log(value);
+  
+  
+
+
+  const [showSignout, setShowSignOut] = useState(false)
+  const checkRoute = useLocation()
+
+  
 
 
 

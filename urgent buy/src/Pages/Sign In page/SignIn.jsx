@@ -134,7 +134,8 @@ const SignIn = () => {
 					<Link style={{ minWidth: "180px" }} href="#">Forgot your password?</Link>
 					<button type='submit' className='rounded mt-4 buttonClass' style={{ minWidth: "160px" }} >Sign In</button>
 					<ToastContainer     
-				zIndex={9999}
+				zIndex={90}
+				position='bottom-left'
                 autoClose={5000}
                 hideProgressBar={false}
                 newestOnTop={false}

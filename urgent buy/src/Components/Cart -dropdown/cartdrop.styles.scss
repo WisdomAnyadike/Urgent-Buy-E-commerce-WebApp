@@ -19,6 +19,7 @@
     .cart-items {
         height: 240px;
         display: flex;
+        align-items: center;
         flex-direction: column;
         overflow: scroll;
     }
