@@ -9,8 +9,8 @@ const Shop = () => {
   let [datas, setData] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:9000/hats').then((res) => {
-      setData(res.data);
+    axios.get('http://localhost:4000/Api/Products/getProducts').then((res) => {
+      setData(res.data.data);
     }).catch((err) => {
       console.log(err);
     })

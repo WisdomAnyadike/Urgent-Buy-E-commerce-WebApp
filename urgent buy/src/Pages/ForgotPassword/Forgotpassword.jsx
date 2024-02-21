@@ -4,10 +4,14 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import '/src/Pages/ForgotPassword/forgotpassword.styles.scss'
 import {toast , ToastContainer} from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { setCanChangePassword } from '../../Components/Redux/Changepassslice'
+
 
 
 const Forgotpassword = () => {
-    const navigate = useNavigate()
+const dispatch = useDispatch()
+ const navigate = useNavigate()
 const [otp , setOtp] = useState('')
 const [ OtpChecker , setOtpChecker]  = useState('')
    const [isClicked , setisClicked ] = useState(false)
@@ -41,7 +45,12 @@ const handleValidate = (e)=> {
     if (otp !== '' &&  OtpChecker !== ''){
         if (OtpChecker == otp){
             toast.success('Success!Proceed to Change Password')
-            navigate('/changePassword')
+           dispatch(setCanChangePassword())
+
+            setTimeout(()=>{
+                navigate('/changePassword')
+            },3000)
+          
         }else {
             toast.error('Invalid Otp')
         }

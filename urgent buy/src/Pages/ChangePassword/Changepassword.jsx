@@ -2,11 +2,17 @@ import React from 'react'
 import '/src/Pages/ChangePassword/changepassword.styles.scss'
 import { useState } from 'react'
 import {toast , ToastContainer} from 'react-toastify'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+
 
 const Changepassword = () => {
-    const navigate = useNavigate()
+const {canChangePassword} = useSelector(state => state.PasswordSlice)
+const navigate = useNavigate()
+
+
+   
     const [password , setPassword] = useState('')
     const [confirmPassword , setConfirmPassword] = useState('')
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@#*])[A-Za-z0-9@#*]{8,}$/
@@ -39,10 +45,12 @@ const Changepassword = () => {
       }
       }
 
+      
+
 
   return (
     <div className="mainDiv">
-    <div className="cardStyle">
+    {canChangePassword === true ?  <div className="cardStyle">
       <form >
         
       <img src="/src/assets/C0EEF199-A578-4A12-90A1-0CE418B54686-removebg-preview.png" alt="BootstrapBrain Logo" width="175" height="150"/>
@@ -70,7 +78,8 @@ const Changepassword = () => {
       </div>
         
     </form>
-    </div>
+    </div>  : ''}
+   
   </div>
   )
 }

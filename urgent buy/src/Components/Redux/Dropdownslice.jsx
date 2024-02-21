@@ -13,14 +13,14 @@ export const DropSlicer = createSlice({
             state.value = !state.value
         },
         setCartArr: (state, action) => {
-            const { id } = action.payload
+            const { _id } = action.payload
             console.log(action.payload);
-            const existingObjIndex = state.cartArr.findIndex(obj => id === obj.id);
+            const existingObjIndex = state.cartArr.findIndex(obj => _id === obj._id);
 
             if (existingObjIndex === -1) {
                 // If object with id does not exist, push the new object to cartArr
                 state.cartArr.push(action.payload);
-                toast.success(`${action.payload.name} added to cart`)
+                toast.success(`${action.payload.productName} added to cart`)
                
             } else {
                 // If object with id exists, increment its quantity by 1
@@ -29,14 +29,15 @@ export const DropSlicer = createSlice({
                     ...existingObj,
                     quantity: (existingObj.quantity || 0) + 1 // Increment quantity or set to 1 if undefined
                 };
-                toast.success(`${existingObj.name} added to cart`)
+
+                toast.success(`${existingObj.productName} added to cart`)
             }
 
         }, 
         decreaseQuantity : (state , action) => {
-            const { id } = action.payload
+            const { _id } = action.payload
             console.log(action.payload);
-            const existingObjIndex = state.cartArr.findIndex(obj => id === obj.id);
+            const existingObjIndex = state.cartArr.findIndex(obj => _id === obj._id);
 
           
                
@@ -53,9 +54,9 @@ export const DropSlicer = createSlice({
 
         }, 
         removeItem: (state , action)=> {
-            const { id } = action.payload
+            const { _id } = action.payload
             console.log(action.payload);
-            const existingObjIndex = state.cartArr.findIndex(obj => id === obj.id);
+            const existingObjIndex = state.cartArr.findIndex(obj => _id === obj._id);
 
           
             state.cartArr.splice(existingObjIndex , 1);    

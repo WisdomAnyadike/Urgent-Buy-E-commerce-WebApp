@@ -16,6 +16,8 @@ const Checkout = () => {
     const dispatch = useDispatch()
 
     const cartArr = useSelector(state => state.DropSlicer.cartArr)
+    const {Email} = useSelector(state => state.Userslice.userObj)
+ 
     let [arr, setArr] = useState([])
     useEffect(()=> {   
         setArr(cartArr)
@@ -26,16 +28,16 @@ const isEmpty = cartArr.length === 0;
 
 
 
-let total = arr.reduce((a,b)=> a + (b.price * b.quantity) , 0 )
+let total = arr.reduce((a,b)=> a + (b.productPrice * b.quantity) , 0 )
 
 const publicKey = 'pk_test_9a558288d1670a641dafa6f4e899ddb24f2fe749'; // Your Paystack public key
   const amount = total * 100; 
 
   const componentProps = {
-    email: 'anyadikewisdom@gmail.com',
+    email: Email ,
     amount,
     metadata: {
-      name:'wisdom',
+      productName:'wisdom',
       phone:"+2348164934974",
     },
     publicKey,
@@ -58,13 +60,13 @@ const publicKey = 'pk_test_9a558288d1670a641dafa6f4e899ddb24f2fe749'; // Your Pa
           </div>
           <div className="card-body">
            
-       { isEmpty ? <small> Your Cart is Empty </small> : arr.map(({id,name , imageUrl , quantity , price})=> 
+       { isEmpty ? <small> Your Cart is Empty </small> : arr.map(({_id,productName , productImage , quantity , productPrice})=> 
         <div className="row mb-2">
               <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
                
                 <div className="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                  <img width={200} height={250} src={imageUrl}
-                    className="w-100 rounded" alt={`${name}`} />
+                  <img width={200} height={250} src={productImage}
+                    className="w-100 rounded" alt={`${productName}`} />
                   <a href="#!">
                     <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)"}}></div>
                   </a>
@@ -74,11 +76,11 @@ const publicKey = 'pk_test_9a558288d1670a641dafa6f4e899ddb24f2fe749'; // Your Pa
 
               <div className="col-lg-5 col-md-6 mb-4 mb-lg-0">
                 
-                <p><strong> {name} </strong></p>
+                <p><strong> {productName} </strong></p>
                 <p>Color: blue</p>
                 <p>Size: M</p>
                 <button type="button" className="btn text-light btn-sm me-1 mb-2" style={{backgroundColor:'#212529'}} data-mdb-toggle="tooltip"
-                  title="Remove item"   onClick={()=> dispatch(removeItem({id,name , imageUrl , quantity , price}))}>
+                  title="Remove item"   onClick={()=> dispatch(removeItem({_id,productName , productImage , quantity , productPrice}))}>
                 
                   <i className="fas fa-trash"></i>
                 </button>
@@ -91,18 +93,18 @@ const publicKey = 'pk_test_9a558288d1670a641dafa6f4e899ddb24f2fe749'; // Your Pa
                 <div className="d-flex mb-4" style={{maxWidth: "300px" }}>
                   <button className="btn text-light  me-2"
                   style={{backgroundColor:'#212529'}}
-                  onClick={()=> dispatch(decreaseQuantity({id,name , imageUrl , quantity , price}))}>
+                  onClick={()=> dispatch(decreaseQuantity({_id,productName , productImage , quantity , productPrice}))}>
                     <i className="fas fa-minus"></i>
                   </button>
 
                   
-                    <small  min="0" className='d-flex align-items-center justify-content-center' style={{width:"50px"}} > {quantity} </small>
+                    <small  min="0" className='d-flex align-items-center justify-content-center' style={{width:"50px"}} >  { quantity} </small>
                     
                   
 
                   <button className="btn text-light  ms-2"
                   style={{backgroundColor:'#212529'}}
-                    onClick={()=> dispatch(setCartArr({id,name , imageUrl , quantity , price}))}>
+                    onClick={()=> dispatch(setCartArr({_id,productName , productImage , quantity , productPrice}))}>
                     <i className="fas fa-plus"></i>
                   </button>
                 </div>
@@ -110,7 +112,7 @@ const publicKey = 'pk_test_9a558288d1670a641dafa6f4e899ddb24f2fe749'; // Your Pa
 
                 
                 <p className="text-start text-md-center">
-                  <strong>N{price  * quantity}.00</strong>
+                  <strong>N{productPrice  * quantity}.00</strong>
                 </p>
                 
               </div>

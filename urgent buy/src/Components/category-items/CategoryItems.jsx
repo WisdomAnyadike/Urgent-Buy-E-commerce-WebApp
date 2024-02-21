@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom'
 const CategoryItems = ({category: {title , imageUrl , id}}) => {
   const navigate = useNavigate()
 
-  const seeMore = (id)=>{
-    console.log(  id);
-navigate(`/category/${id}`)
+  const seeMore = (title)=>{
+    console.log(  title);
+navigate(`/category/${title}`)
   }
 
 
   return (
-    <div onClick={()=> seeMore( id)}  className='category-container rounded'   style={{ 
+    <div onClick={()=> seeMore( title)}  className='category-container rounded'   style={{ 
       backgroundImage: `url(${imageUrl})`, 
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
