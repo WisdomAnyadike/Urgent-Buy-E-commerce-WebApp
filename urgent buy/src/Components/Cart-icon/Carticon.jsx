@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 
 const Carticon = () => {
 const dispatch = useDispatch()
-const {cartArr} = useSelector(state => state)
+const cartArr = useSelector(state => state.DropSlicer.cartArr)
 
   return (
     <div className='cart-icon-container' onClick={()=> dispatch(setDropOpen())}>

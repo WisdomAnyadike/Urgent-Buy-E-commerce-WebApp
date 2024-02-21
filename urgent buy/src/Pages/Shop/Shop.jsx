@@ -5,6 +5,7 @@ import '/src/Pages/Shop/shop.styles.scss'
 import { ToastContainer } from 'react-toastify';
 
 const Shop = () => {
+ 
   let [datas, setData] = useState([])
 
   useEffect(() => {
@@ -22,6 +23,12 @@ const Shop = () => {
       )}
 <ToastContainer
   position='bottom-left'
+//   progressStyle={{
+//   backgroundColor : '#4e05b2'
+// }
+// }
+toastStyle={{ backgroundColor : 'white',
+color:"BFE5B9"}}
 />
     </div>
   )

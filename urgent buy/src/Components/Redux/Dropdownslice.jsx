@@ -32,10 +32,44 @@ export const DropSlicer = createSlice({
                 toast.success(`${existingObj.name} added to cart`)
             }
 
+        }, 
+        decreaseQuantity : (state , action) => {
+            const { id } = action.payload
+            console.log(action.payload);
+            const existingObjIndex = state.cartArr.findIndex(obj => id === obj.id);
+
+          
+               
+                const existingObj = state.cartArr[existingObjIndex];
+                state.cartArr[existingObjIndex] = {
+                    ...existingObj,
+                    quantity: (existingObj.quantity  || 1 ) - 1 // decrement quantity or set to 0 if undefined
+                };
+             
+            
+
+
+
+
+        }, 
+        removeItem: (state , action)=> {
+            const { id } = action.payload
+            console.log(action.payload);
+            const existingObjIndex = state.cartArr.findIndex(obj => id === obj.id);
+
+          
+            state.cartArr.splice(existingObjIndex , 1);    
+             
+
+        },
+        emptyCart : (state) => {
+            state.cartArr = []
         }
+
+
     }
 
 })
 
-export const { setDropOpen, setCartArr } = DropSlicer.actions
+export const { setDropOpen, setCartArr , decreaseQuantity , removeItem , emptyCart } = DropSlicer.actions
 export default DropSlicer.reducer

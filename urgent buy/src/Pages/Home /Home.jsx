@@ -3,25 +3,35 @@ import { Link } from 'react-router-dom'
 import NavbarComponent from '../../Components/Navbar/NavbarComponent'
 import { Outlet } from 'react-router-dom'
 import '/src/Pages/Home /home.styles.scss'
+import Footer from '../../Components/Footer/Footer'
+import { useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 
 
 
 const Home = () => {
+  const location = useLocation()
+  const [footer , setFooter] = useState(false)
+
+  useEffect(() => {
+    if (location.pathname == '/signin') {
+      setFooter(false)
+    } else {
+      setFooter(true)
+    }
+  }, [location])
+
+
+ 
   
   return (
     <div>
  <NavbarComponent/>
     <Outlet/>
-    <footer className='w-100 position-fixed d-flex align-items-start justify-content-center btn btn-light ' style={{bottom:"0"}}>
-	<p className='mt-0'>
-		Created  by
-		<Link className='links' to="http://linkedin.com/in/wisdom-anyadike-935870240" > anyacodes </Link>
-		- Check how I created this 
-		<Link className='links' to="https://github.com/WisdomAnyadike/Urgent-Buy-E-commerce-WebApp"> here </Link>.
-    &copy; 2024 Anyadike Wisdom Chidubem. All Rights Reserved.
-	</p>
-</footer>
+   {footer && <Footer/> } 
+  
     </div>
   )
 }
